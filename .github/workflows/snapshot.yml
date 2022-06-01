@@ -1,9 +1,7 @@
 name: Snapshot build & publish
 
 on:
-  push:
-    branches:
-      - master
+  - push
 
 jobs:
   build:
@@ -76,14 +74,6 @@ jobs:
           args: -p=never
           release: false
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ runner.os }}-artifact
-          path: |
-            dist/Chrysalis-*
-            !dist/*.blockmap
-
   publish:
     needs: build
     runs-on: ubuntu-latest
@@ -113,9 +103,3 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           path: artifacts
-
-      - name: Publish a snapshot
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
-        run: gh release upload snapshot artifacts/*/Chrysalis-*
