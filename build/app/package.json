@@ -1,0 +1,29 @@
+{
+  "name": "electron-react-boilerplate",
+  "productName": "electron-react-boilerplate",
+  "version": "3.1.0",
+  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "main": "./dist/main/index.js",
+  "author": {
+    "name": "Electron React Boilerplate Maintainers",
+    "email": "electronreactboilerplate@gmail.com",
+    "url": "https://github.com/electron-react-boilerplate"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/electron-rebuild.js",
+    "link-modules": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/link-modules.js",
+    "postinstall": "yarn electron-rebuild && yarn link-modules"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "avrgirl-arduino": "keyboardio/avrgirl-arduino#serialport-10",
+    "serialport": "^10.4.0",
+    "teensy-loader": "^0.2.0",
+    "usb": "^2.4.2"
+  },
+  "resolutions": {
+    "teensy-loader/usb": "^2.4.2",
+    "avrgirl-arduino/stk500-v2/async": "^2.6.4",
+    "avrgirl-arduino/stk500/async": "^2.6.4"
+  }
+}
