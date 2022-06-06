@@ -12,5 +12,5 @@
 *.woff2 binary
 *.hex   binary
 *.bin   binary
-/static/avrdude/* binary
-/static/dfu-util/* binary
+*.dll   binary
+dfu-util binary
