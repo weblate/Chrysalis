@@ -20,16 +20,7 @@ module.exports = (api) => {
   return {
     presets: [
       // @babel/preset-env will automatically target our browserslist targets
-      [
-        require('@babel/preset-env'),
-        {
-            debug: false,
-            targets: {
-              node: 'current',
-              electron: `${require("electron/package.json").version}`
-            },
-        },
-      ],
+      [require('@babel/preset-env')],
 
       require('@babel/preset-typescript'),
       [
@@ -37,7 +28,7 @@ module.exports = (api) => {
         {
           targets: {
             node: 'current',
-            electron: `${require("electron/package.json").version}`
+            electron: '18.3.0',
           },
           debug: true,
           useBuiltIns: true,
