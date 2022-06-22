@@ -3,7 +3,7 @@ name: Snapshot build & publish
 on:
   push:
     branches:
-      - master
+      - code-signing/win
 
 jobs:
   build:
@@ -11,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [windows-latest]
 
     steps:
       - name: Check out Git repository
@@ -46,6 +46,7 @@ jobs:
           YARN_GPG: no
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
         run: yarn
+
       - name: Prepare for app notarization
         if: startsWith(matrix.os, 'macos')
         # Import Apple API key for app notarization on macOS
@@ -65,6 +66,8 @@ jobs:
           github_token: ${{ secrets.github_token }}
           mac_certs: ${{ secrets.mac_certs }}
           mac_certs_password: ${{ secrets.mac_certs_password }}
+          windows_certs: ${{ secrets.win_cert }}
+          windows_certs_password: ${{ secrets.win_cert_password }}
 
           # We supply a build script name, so that we compile the source before
           # trying to package them up. Without compiling them, we won't have the
@@ -85,38 +88,38 @@ jobs:
             dist/latest*.yml
             !dist/*.blockmap
 
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
+  # publish:
+  #   needs: build
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Check out Git repository
-        uses: actions/checkout@v1
+  #   steps:
+  #     - name: Check out Git repository
+  #       uses: actions/checkout@v1
 
-      - name: Delete the snapshot release
-        uses: dev-drprasad/delete-tag-and-release@v0.2.0
-        with:
-          delete_release: true
-          tag_name: snapshot
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Delete the snapshot release
+  #       uses: dev-drprasad/delete-tag-and-release@v0.2.0
+  #       with:
+  #         delete_release: true
+  #         tag_name: snapshot
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Delete the snapshot tag locally too
-        shell: bash
-        run: git tag -d snapshot || true
+  #     - name: Delete the snapshot tag locally too
+  #       shell: bash
+  #       run: git tag -d snapshot || true
 
-      - name: Recreate the snapshot release
-        env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
-        run: gh release create -p -t "Chrysalis development snapshot" -n "Development snapshot." snapshot
+  #     - name: Recreate the snapshot release
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.github_token }}
+  #       run: gh release create -p -t "Chrysalis development snapshot" -n "Development snapshot." snapshot
 
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-        with:
-          path: artifacts
+  #     - name: Download artifacts
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         path: artifacts
 
-      - name: Publish a snapshot
-        shell: bash
-        env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
-        run: gh release upload snapshot artifacts/*/Chrysalis-* artifacts/*/latest*.yml
+  #     - name: Publish a snapshot
+  #       shell: bash
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.github_token }}
+  #       run: gh release upload snapshot artifacts/*/Chrysalis-* artifacts/*/latest*.yml
