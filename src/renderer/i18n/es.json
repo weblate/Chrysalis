@@ -69,7 +69,11 @@
                 "title": "¿Importar el diseño seleccionado?",
                 "contents": "Esto sobreescribirá su diseño actual, y cualquier cambio sin guardados se perderá. ¿Está seguro de que quiere continuar?"
             },
-            "exporting": "Exportando…"
+            "exporting": "Exportando…",
+            "loadLayoutFromFile": "Restaurar distribución del teclado del archivo...",
+            "loadLayoutFromFileOption": "Solo distribución de teclado",
+            "loadFullSettingsFromFile": "Restaurar ajustes desde archivo…",
+            "loadFullSettingsFromFileOption": "Ajustes completos de EEPROM"
         },
         "sidebar": {
             "custom": {
@@ -89,7 +93,7 @@
                 "whenHeld": "Al mantener",
                 "targetLayer": "Capa",
                 "title": "Acción secundario",
-                "help-layerLimit": "Debido a los limites de firmware, cambiar a capas superiores de la \"{{ layer8 }}\" no es compatible a través de las acciones secundarias.",
+                "help-layerLimit": "Debido a los limites de firmware, cambiar a capas superiores de la \"{{ layer7 }}\" no es compatible a través de las acciones secundarias.",
                 "help": "Al pulsarse, se obtiene la función principal. Al mantenerse, se obtiene la acción secundaria.",
                 "modifier": "Modificadora",
                 "type": {
@@ -99,7 +103,7 @@
                 }
             },
             "colors": {
-                "help": "Asignar un color a la tecla seleccionada haciendo clic en uno de los cuadros de la paleta inferior. Para cambiar el color de una entrada de la paleta, use el selector de color.",
+                "help": "Asignar un color a la tecla pulsando en la paleta inferior. Utilice el color obtenido para ajuste de la paleta.",
                 "title": "Colores"
             },
             "lang_intl": {
@@ -113,13 +117,17 @@
                 }
             },
             "macros": {
-                "title": "Macros"
+                "title": "Macros",
+                "help": "Asignar macros codificadas en su firmware empotado a las teclas."
             },
             "dynmacros": {
                 "title": "Macros dinámicas",
                 "usage_overview": {
-                    "bytes": "bytes"
-                }
+                    "bytes": "bytes",
+                    "label": "Espacio macro utilizado:",
+                    "usage": "{{ used }}/{{ size }}"
+                },
+                "help": "Asignar y editar macros dinámicas a las teclas."
             },
             "volume": {
                 "help": "Teclas de control de volumen.",
@@ -143,17 +151,20 @@
             },
             "keypicker": {
                 "topsyturvy": {
-                    "label": "Invertir Mayús"
+                    "label": "Invertir Mayús",
+                    "tooltip": "Invierte el comportamiento de la tecla Mayús. (Por ejemplo, envíe 'A' cuando no se pulse). Esto no puede combinarse con otros modificadores."
                 },
                 "mods": "Modificadoras",
                 "modsHelp": "Modificadoras que se suman al pulsar esta tecla.",
                 "oneshot": {
-                    "label": "Persistente"
+                    "label": "Persistente",
+                    "tooltip": "Toque para activar para la siguiente pulsación de teclado, presiónelo para actuar como un modificador normal, toque dos veces para activar el modificador."
                 },
                 "specialModsHelp": "Cambie la forma en que las modificadoras afectan esta tecla."
             },
             "layer": {
-                "help": "Teclas que permiten cambiar de capa."
+                "help": "Teclas que permiten cambiar de capa.",
+                "title": "Capas y mapas de teclado"
             },
             "media": {
                 "help": "Teclas de control multimedia.",
@@ -168,6 +179,22 @@
             "ledkeys": {
                 "help": "Controle los temas y efectos LED de su teclado.",
                 "title": "Control de LED"
+            },
+            "blekeys": {
+                "title": "Bluetooth",
+                "help": "Control de conexión y emparejado de Bluetooth."
+            },
+            "leader": {
+                "title": "Líder",
+                "help": "Asignar tecla Líder. Para configurar esta característica, adapte el boceto Calidoscopio para su teclado."
+            },
+            "oneshotMetaKeys": {
+                "metaStickyKey": {
+                    "tooltip": "Hace la tecla siguiente pulsada pinchada bajo la tapa otra vez."
+                },
+                "activeStickyKey": {
+                    "tooltip": "Hace que las teclas pulsadas en ese momento queden fijas hasta que se vuelvan a pulsar."
+                }
             }
         },
         "overview": {
